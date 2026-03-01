@@ -1,0 +1,10 @@
+# Logs
+*.log
+cron.log
+
+# State files (personal)
+heartbeat-state.json
+heartbeat-prompt.txt
+
+# macOS
+.DS_Store
