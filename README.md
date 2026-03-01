@@ -269,4 +269,52 @@ Created by [Alfirus](https://github.com/alfirus)
 
 ---
 
+## 🤖 Integrating with AI (OpenCode/Claude)
+
+To make your AI aware of the heartbeat system, add this to your AGENTS.md or CLAUDE.md:
+
+```markdown
+## 💓 Heartbeats - OpenCode External Heartbeat System
+
+We use an external heartbeat system for proactive checks:
+
+**Location:** `~/Projects/opencode-heartbeats/`
+
+**What it does:**
+- Runs every hour via cron job
+- Rotating checks: email → calendar → weather → telegram
+- Writes results to `heartbeat-prompt.txt`
+- Logs to `heartbeat.log`
+
+**Cron setup:**
+```bash
+0 * * * * /path/to/opencode-heartbeats/heartbeat.sh >> cron.log 2>&1
+```
+
+**Files:**
+- `heartbeat.sh` - Main script
+- `heartbeat-state.json` - Tracks last check times
+- `heartbeat.log` - Log file
+- `heartbeat-prompt.txt` - Generated prompt for AI
+
+**How AI uses it:**
+1. At startup, check if `heartbeat-prompt.txt` exists
+2. Read the file for any pending notifications
+3. If content is not "HEARTBEAT_OK", report to user
+4. Delete or archive after reporting
+
+**State tracking:**
+- Check `heartbeat-state.json` for last check times
+- Don't spam - respect quiet hours (23:00-08:00)
+```
+
+---
+
+## 📞 Support
+
+- **Issues:** https://github.com/alfirus/opencode-heartbeats/issues
+- **Discussions:** https://github.com/alfirus/opencode-heartbeats/discussions
+
+---
+
 *For issues and contributions: https://github.com/alfirus/opencode-heartbeats*
